@@ -1,0 +1,66 @@
+{% extends "parent.html" %}
+
+{% block content %}
+<table class="text-center" width="100%">
+  <tr>
+    <th> Cash Balance: ${{name}} </th>
+    <th> Debit Balance: ${{name}} </th>
+    <th> Credit Balance: ${{name}} </th>
+  </tr>
+</table>
+
+<div class="table-responsive">
+  <table class="table table-hover text-center" width="100%">
+    <thead>
+      <tr class="text-white" style="background-color:#9dabe1;">
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Mode</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <form action = "/update_records">
+          <div class="form-group">
+            <td><input class="form-control text-center" type="date" name="date" id="date"></td>
+            <td><input class="form-control text-center" type="text" name="description" id="description" placeholder="Description"></td>
+            <td class="row">
+              <label class="col-sm-1 col-form-label" for="amount">$</label>
+              <input class="form-control col-sm-10 text-center" type="number step=0.01" name="amount" id="amount" placeholder=0.00></td>
+            <td>
+              <select class="custom-select" name="mode" id="mode">
+                <option selected>Choose...</option>
+                <option value="cash">cash</option>
+                <option value="debit">debit</option>
+                <option value="credit">credit</option>
+              </select>
+            </td>
+            <td><button class="btn btn-outline-secondary btn-sm" type="submit" name="update" value="add" id="record">Add</button></td>
+          </div>
+        </form>
+      </tr>
+      {% for each in records %}
+      <tr>
+        <td>{{each[1]}}</td>
+        <td>{{each[2]}}</td>
+        <td>${{each[3]}}</td>
+        <td>{{each[4]}}</td>
+        <td>
+          <form action = "/update_records">
+            <div class="form-group">
+              <input type="hidden" name="date" value="{{each[1]}}">
+              <input type="hidden" name="description" value="{{each[2]}}">
+              <input type="hidden" name="amount" value={{each[3]}}>
+              <input type="hidden" name="mode" value={{each[4]}}>
+              <button type="submit" class="btn btn-outline-secondary btn-sm" name = "update" value = "remove">Remove</button>
+	    </div>
+	  </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

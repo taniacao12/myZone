@@ -1,0 +1,31 @@
+{% extends "parent.html" %}
+
+{% block content %}
+<div class="userInfo">
+  <form action="/adduser">
+    <div class="form-group row">
+      <label class="col-sm-2 col-control-label" for="name">Full Name</label>
+      <input class="col form-control mr-3" type="text" name="name" id="name">
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-control-label" for="new_user">Username</label>
+      <input class="col form-control mr-3" type="text" name="user" id="new_user">
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-control-label" for="new_pw">Password</label>
+      <input class="col form-control mr-3" type="password" name="password" id="new_pw">
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-control-label" for="confirm_pw">Confirm Password</label>
+      <input class="col form-control mr-3" type="password" name="confirm_password" id="confirm_pw">
+    </div>
+    <div class="form-group text-center">
+      <button class="btn text-white col-sm-2" type="submit" style="background-color: #8192d9;" id="account">Register</button>
+    </div>
+  </form>
+
+  <br>
+
+  <p class="text-center"> Already a member? Login <a href="/">here</a>. </p>
+</div>
+{% endblock %}

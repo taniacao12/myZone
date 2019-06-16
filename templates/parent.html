@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+{% block head %}
+<head>
+  <meta charset="utf-8">
+  <title> {{ title }} </title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" href="/static/favicon.png" type="image/png">
+</head>
+{% endblock %}
+
+<body>
+  {% if logged_in %}
+  {% block header %}
+  <nav class="navbar navbar-dark navbar-expand-lg fixed-top" style="background-color: #8192d9;">
+    <a class="navbar-brand" href="/"><img src="/static/favicon.png" class="img-fluid d-inline-block align-top" width="36" height="36"><span class="h2"> My Zone </span></a>
+    <button class="navbar-toggler" type="button"  data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <form class="form-inline" action = "#">
+            <input class="form-control mr-2" type="search" placeholder="Looking For Something..." aria-label="Search" name="search_location">
+            <button class="btn btn-outline-light my-2" type="submit">Search</button>
+          </form>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#"> My Location </a></li>
+        <li class="nav-item"><a class="nav-link" href="/finance"> Finances </a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="user" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{name}} </a>
+          <div class="dropdown-menu" aria-labelledby="user" style="background:#bac3ea">
+            <a class="dropdown-item text-secondary" href="/settings"> Settings </a>
+            <a class="dropdown-item text-secondary" href="/logout"> Logout </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  {% endblock %}
+  <br><br>
+  {% endif %}
+
+  <br>
+
+  <div class="container">
+    <div class="jumbotron" style="background:#f2f4fb !important">
+      <h1 class="text-center"> <font color="#8192d9"> {{ heading }} </font></h1>
+      {% block response %}
+      {% set messages = get_flashed_messages() %}
+      {% for message in messages %}
+      <div class="alert alert-danger" role="alert">{{message}}</div>
+      {% endfor %}
+      {% endblock %}
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+
+  {% block footer %}
+  <footer class="page-footer">
+    <div class="footer-copyright text-center py-3"> &copy 2019 Copyright: <a href="https://github.com/taniacao12">Tania Cao</a></div>
+  </footer>
+  {% endblock %}
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</body>
+</html>
