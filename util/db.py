@@ -74,11 +74,17 @@ def get_records(username):
     """Get user's expenses and income records."""
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    records = []
+    list = []
     for each in c.execute("SELECT * FROM money_matters WHERE username =?", (username,)):
-        records.append(each)
+        list.append(each)
+    for num in range(len(list)- 1, 0, -1):
+        for x in range(num):
+            if list[x][1] < list[x+1][1]:
+                temp = list[x]
+                list[x] = list[x+1]
+                list[x+1] = temp
     db.close()
-    return records
+    return list
 
 def add_record(username, date, description, amount, mode):
     """Insert the credentials for newly registered users into the database."""

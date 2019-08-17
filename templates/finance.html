@@ -3,9 +3,10 @@
 {% block content %}
 <table class="text-center" width="100%">
   <tr>
-    <th> Cash Balance: ${{name}} </th>
-    <th> Debit Balance: ${{name}} </th>
-    <th> Credit Balance: ${{name}} </th>
+    <th> Total Balance: ${{total}} </th>
+    <th> Cash Balance: ${{cash}} </th>
+    <th> Debit Balance: ${{debit}} </th>
+    <th> Venmo Balance: ${{venmo}} </th>
   </tr>
 </table>
 
@@ -28,7 +29,7 @@
             <td><input class="form-control text-center" type="text" name="description" id="description" placeholder="Description"></td>
             <td class="row">
               <label class="col-sm-1 col-form-label" for="amount">$</label>
-              <input class="form-control col-sm-10 text-center" type="number step=0.01" name="amount" id="amount" placeholder=0.00></td>
+              <input class="form-control col-sm-10 text-center" type="number" step="0.01" name="amount" id="amount" placeholder=0.00></td>
             <td>
               <select class="custom-select" name="mode" id="mode">
                 <option selected>Choose...</option>

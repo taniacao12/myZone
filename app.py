@@ -69,14 +69,22 @@ def finance():
     if "logged_in" in session:
         name = db.get_name(session["logged_in"])
         records = db.get_records(session["logged_in"])
-        return render_template("finance.html", title = "Finance", heading = "Finance", user = session["logged_in"], name = name, records = records, logged_in = True)
+        cash = debit = venmo = 0
+        if records != []:
+            for each in records:
+                if each[4] == "cash":
+                    cash += each[3]
+                elif each[4] == "debit":
+                    debit += each[3]
+                elif each[4] == "venmo":
+                    venmo += each[3]
+        return render_template("finance.html", title = "Finance", heading = "Finance", user = session["logged_in"], name = name, records = records, total = format(cash + debit + venmo, '.2f'), cash = cash, debit = debit, venmo = venmo, logged_in = True)
     return redirect(url_for("login"))
 
 # updates user's financial records
 @app.route("/update_records", methods = ["GET", "POST"])
 def update_records():
     date = request.args["date"]
-    print(date)
     description = request.args["description"]
     amount = request.args["amount"]
     mode = request.args["mode"]
